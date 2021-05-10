@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>微笙迷宫挑战赛</title>
+<link href="css/style.css" rel="stylesheet">
+<link rel="shortcut icon" href="images/favicon.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style_1.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery.hotkey.js"></script>
+</head>
+<div id="circle"></div><p id="time">60s</p>
+<body>
+<div class="container">
+<h1 class="title">迷宫挑战赛</h1>
+<div class="centerd">
+<p>规则：从左上角出发，终点为右下角红旗处。在左下角时限内到达终点则为获胜，时间不够时可选择重开</p>
+<div id="mg" class="mg centerd"></div>
+<br />
+<p>提示：您可以使用键盘上的上丶下丶左丶右方向键控制迷宫中图标的移动。</p>
+
+<form class="form-inline">
+	<div class="form-group">
+		<input type="text" class="form-control" id="mg_width" value="20" size="4" maxlength="2" onkeypress="return isNumber(event)" style="display:none" />
+	</div>
+	<div class="form-group">
+		<input type="text" class="form-control" id="mg_height" value="20" size="4" maxlength="2" onkeypress="return isNumber(event)" style="display:none" />
+	</div>
+	<button type="button" class="btn btn-default" onclick="new_mg();">重新开始</button>
+</form>
+</div>
+</div>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script src="js/function.js"></script>
+<script src="js/script_activity.js"></script>
+<script>
+function new_mg() {
+	
+	var w = parseInt(document.getElementById("mg_width").value) || 20,
+		h = parseInt(document.getElementById("mg_height").value) || 20;
+	mg.set({width: w, height: h}).create().show();
+	document.getElementById("mg_width").value = w;
+	document.getElementById("mg_height").value = h;
+	
+	
+	// count();
+}
+// function count() {
+// 	$.get("stat/count.py", {
+// 			r: Math.random()
+// 		}, function (r) {
+// 			r = r.replace(/[\r\n\s]/g, "");
+// 			if (r.match(/^\d+$/))
+// 				$("#count").html(r);
+// 		});
+// }
+function mark(h, ob) {
+	mg.me.setMark(h, ob.checked);
+}
+var mg = new MG("mg");
+new_mg();
+</script>
+</body>
+</html>
